@@ -31,9 +31,10 @@ export class GitHubLoader {
       this.mkDirRecursive(companyPath);
 
       if (fs.existsSync(repoPath)) {
+        this.git.submoduleUpdate(repoPath)
         // this.git.cwd({ path: repoPath }).pull();
       } else {
-        this.git.submoduleAdd(repo.git_url,companyPath)
+        this.git.submoduleAdd(repo.git_url,repoPath)
         // this.git.cwd({ path: companyPath }).clone(repo.git_url);
       }
     });
