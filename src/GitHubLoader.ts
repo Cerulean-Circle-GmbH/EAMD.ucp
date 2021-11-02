@@ -16,8 +16,8 @@ export class GitHubLoader {
     this.git = simpleGit();
   }
 
-  async loadUcpComponents(rootdir:string) {
-    const dir = path.join(rootdir,"com","github","ucpComponents")
+  async loadUcpComponents(rootdir: string) {
+    const dir = path.join(rootdir, "com", "github", "ucpComponents");
     let result = await this.octokit.rest.search.repos({
       q: "topic:ucp-component",
     });
@@ -29,15 +29,20 @@ export class GitHubLoader {
 
       if (fs.existsSync(repoPath)) {
         console.log("update");
-        //TODO check logic
-        // await this.git.cwd(repoPath).pull();
+        if (fs.existsSync(path.join(repoPath, ".git"))) {
+          console.log("repo exists just pull");
+          //TODO check logic
+          await this.git.cwd(repoPath).pull();
+        } else {
+          await this.git.clone(repo.ssh_url, repoPath);
+        }
       } else {
+        console.log("repo does not exist , clone it");
         await this.git
           .submoduleAdd(repo.ssh_url, repoPath)
           .then((f) => console.log(f));
       }
     }
-
   }
 
   private mkDirRecursive(dir: string) {
