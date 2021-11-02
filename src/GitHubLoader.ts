@@ -18,6 +18,7 @@ export class GitHubLoader {
     this.componentsDir = path.join("Components", "Github");
     this.mkDirRecursive(this.componentsDir);
     this.git = simpleGit();
+    this.git.status().then(result=>console.log("status",result))
   //  console.log("status",this.git.status())
   }
 
@@ -35,7 +36,8 @@ export class GitHubLoader {
         this.git.submoduleUpdate(repoPath)
         // this.git.cwd({ path: repoPath }).pull();
       } else {
-        this.git.submoduleAdd(repo.git_url,repoPath)
+        // this.mkDirRecursive(repoPath)
+        this.git.submoduleAdd(repo.git_url,repoPath).then(f=>console.log("submodule",f))
         // this.git.cwd({ path: companyPath }).clone(repo.git_url);
       }
     });
