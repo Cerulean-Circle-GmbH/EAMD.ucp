@@ -33,12 +33,13 @@ export class GitHubLoader {
       this.mkDirRecursive(companyPath);
 
       if (fs.existsSync(repoPath)) {
-        this.git.submoduleUpdate(repoPath)
-        // this.git.cwd({ path: repoPath }).pull();
+        console.log("update")
+        this.git.cwd(repoPath).pull()
+        // this.git.submoduleInit(repoPath).then(f=>console.log("f",f))
+        // this.git.submoduleUpdate(repoPath).then(f=>console.log("f",f))
       } else {
-        // this.mkDirRecursive(repoPath)
-        this.git.submoduleAdd(repo.git_url,repoPath).then(f=>console.log("submodule",f))
-        // this.git.cwd({ path: companyPath }).clone(repo.git_url);
+        this.git.submoduleAdd(repo.git_url,repoPath)
+        
       }
     });
   }
