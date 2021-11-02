@@ -1,0 +1,3 @@
+[submodule "Components/Github/Cerulean-Circle-GmbH/once.ts"]
+	path = Components/Github/Cerulean-Circle-GmbH/once.ts
+	url = git@github.com:Cerulean-Circle-GmbH/once.ts.git
