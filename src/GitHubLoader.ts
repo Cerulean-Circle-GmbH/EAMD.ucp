@@ -38,7 +38,7 @@ export class GitHubLoader {
         // this.git.submoduleInit(repoPath).then(f=>console.log("f",f))
         // this.git.submoduleUpdate(repoPath).then(f=>console.log("f",f))
       } else {
-        this.git.submoduleAdd(repo.git_url,repoPath)
+        this.git.submoduleAdd(repo.ssh_url,repoPath).then(f=>console.log(f))
         
       }
     });
