@@ -9,9 +9,8 @@
     "lerna:bootstrap": "lerna bootstrap",
     "lerna:build": "npx lerna run build",
     "copy:dist": "ts-node scripts/copyDist",
-
     "init": "npm-run-all clean load:components lerna:bootstrap lerna:build copy:dist",
-    "build:modules":"npm run lerna:bootstrap && npm run lerna:build &&  npm run copy:dist",
+    "build:modules": "npm run lerna:bootstrap && npm run lerna:build &&  npm run copy:dist",
     "build:once": "rimraf src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts/dist && tsc --project src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts/tsconfig.json && cp -r src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts/src/* src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts/dist && npm run copy:dist",
     "start:once": "node src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts/dist/esm/Once.class.js",
     "dev": "npm-run-all dev:onceserver",
@@ -39,5 +38,9 @@
     "simple-git": "^2.47.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "latest": "^0.2.0",
+    "node": "^17.0.1"
   }
 }
