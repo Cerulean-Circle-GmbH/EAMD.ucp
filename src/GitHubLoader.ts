@@ -15,7 +15,7 @@ export class GitHubLoader {
 
   constructor() {
     this.octokit = new Octokit();
-    this.componentsDir = path.join("Components", "Github");
+    this.componentsDir = path.join("src", "Github");
     this.mkDirRecursive(this.componentsDir);
     this.git = simpleGit();
     this.git.status().then((result) => console.log("status", result));

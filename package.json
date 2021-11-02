@@ -4,7 +4,8 @@
   "description": "Enterprise Application Management Descriptors for Unit Component Package Standard",
   "main": "index.js",
   "scripts": {
-    "init": "ts-node scripts/init"
+    "init": "ts-node scripts/init",
+    "clean": "npx rimraf dist && lerna clean --yes && lerna run clean"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/Cerulean-Circle-GmbH/EAMD.ucp#readme",
   "devDependencies": {
     "fs": "^0.0.1-security",
+    "lerna": "^4.0.0",
     "octokit": "^1.7.0",
     "simple-git": "^2.47.0",
     "ts-node": "^10.4.0"
