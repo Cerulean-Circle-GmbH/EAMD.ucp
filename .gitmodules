@@ -1,6 +1,6 @@
-[submodule "src/Github/Cerulean-Circle-GmbH/once.ts"]
-	path = src/Github/Cerulean-Circle-GmbH/once.ts
+[submodule "src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts"]
+	path = src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts
 	url = git@github.com:Cerulean-Circle-GmbH/once.ts.git
-[submodule "src/Github/phibar/test"]
-	path = src/Github/phibar/test
+[submodule "src/submodules/com/github/ucpComponents/phibar/test"]
+	path = src/submodules/com/github/ucpComponents/phibar/test
 	url = git@github.com:phibar/test.git

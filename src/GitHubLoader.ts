@@ -5,41 +5,39 @@ import path from "path";
 
 export class GitHubLoader {
   private octokit: Octokit;
-  private componentsDir: string;
   private git: SimpleGit;
 
-  static async loadUcpComponents() {
-    let loader = new GitHubLoader();
-    loader.loadUcpComponents();
+  static async init() {
+    return new GitHubLoader();
   }
 
   constructor() {
     this.octokit = new Octokit();
-    this.componentsDir = path.join("src", "Github");
-    this.mkDirRecursive(this.componentsDir);
     this.git = simpleGit();
-    this.git.status().then((result) => console.log("status", result));
   }
 
-  async loadUcpComponents() {
+  async loadUcpComponents(rootdir:string) {
+    const dir = path.join(rootdir,"com","github","ucpComponents")
     let result = await this.octokit.rest.search.repos({
       q: "topic:ucp-component",
     });
 
     for (let repo of result.data.items) {
-      const repoPath = path.join(this.componentsDir, repo.full_name);
+      const repoPath = path.join(dir, repo.full_name);
       const companyPath = path.parse(repoPath).dir;
       this.mkDirRecursive(companyPath);
 
       if (fs.existsSync(repoPath)) {
         console.log("update");
-        await this.git.cwd(repoPath).pull();
+        //TODO check logic
+        // await this.git.cwd(repoPath).pull();
       } else {
         await this.git
           .submoduleAdd(repo.ssh_url, repoPath)
           .then((f) => console.log(f));
       }
     }
+
   }
 
   private mkDirRecursive(dir: string) {

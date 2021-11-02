@@ -2,10 +2,21 @@
   "name": "eamd.ucp",
   "version": "1.0.0",
   "description": "Enterprise Application Management Descriptors for Unit Component Package Standard",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "init": "ts-node scripts/init",
-    "clean": "npx rimraf dist && lerna clean --yes && lerna run clean"
+    "clean": "npx rimraf dist && lerna clean --yes && lerna run clean",
+    "load:components": "ts-node scripts/loadComponents",
+    "lerna:bootstrap": "lerna bootstrap",
+    "lerna:build": "npx lerna run build",
+    "copy:dist": "ts-node scripts/copyDist",
+
+    "init": "npm-run-all clean load:components lerna:bootstrap lerna:build copy:dist",
+    "build:modules":"npm run lerna:bootstrap && npm run lerna:build &&  npm run copy:dist",
+    "build:once": "rimraf src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts/dist && tsc --project src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts/tsconfig.json && cp -r src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts/src/* src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts/dist && npm run copy:dist",
+    "start:once": "node src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts/dist/esm/Once.class.js",
+    "dev": "npm-run-all dev:onceserver",
+    "dev:onceserver": "nodemon --watch src/submodules/com/github/ucpComponents/Cerulean-Circle-GmbH/once.ts/src -e ts,ejs,html --exec npm-run-all build:once start:once copy:dist",
+    "dev:components": "nodemon --watch src/submodules --ignore dist -e ts,html,less --exec npm run build:modules "
   },
   "repository": {
     "type": "git",
@@ -21,8 +32,12 @@
   "devDependencies": {
     "fs": "^0.0.1-security",
     "lerna": "^4.0.0",
+    "nodemon": "^2.0.14",
+    "npm-run-all": "^4.1.5",
     "octokit": "^1.7.0",
+    "rimraf": "^3.0.2",
     "simple-git": "^2.47.0",
-    "ts-node": "^10.4.0"
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
   }
 }
