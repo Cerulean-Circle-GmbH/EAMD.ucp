@@ -17,7 +17,8 @@ export class GitHubLoader {
     this.octokit = new Octokit();
     this.componentsDir = path.join("Components", "Github");
     this.mkDirRecursive(this.componentsDir);
-    this.git = simpleGit(this.componentsDir);
+    this.git = simpleGit();
+  //  console.log("status",this.git.status())
   }
 
   async loadUcpComponents() {
